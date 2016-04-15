@@ -1,7 +1,9 @@
 pytest
-mitmproxy
+mitmproxy==0.13.0
 cherrypy
 termcolor
 watchdog
 wheel==0.23.0
+pathtools
+pyyaml
 -e git+https://github.com/pyinstaller/pyinstaller.git@develop#egg=Package

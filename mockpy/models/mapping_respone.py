@@ -85,6 +85,7 @@ class BodyResponse(object):
         with open(self.res_path + "/" + file, "r") as the_file:
             content = the_file.read()
             if decode_utf8:
+                content = unicode(content, 'utf-8')
                 return content.encode('utf8')
             else:
                 return content
