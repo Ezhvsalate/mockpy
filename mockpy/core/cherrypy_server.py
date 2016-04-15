@@ -23,7 +23,7 @@ class CherryPyServer(object):
 
 def start_mock_server(port, inout_path, res_path):
     cherrypy.config.update({'server.socket_port': port, "environment": "embedded"})
-
+    cherrypy.config.update({'server.socket_host': '0.0.0.0'})
     def signal_handler(signal, frame):
         info("\nShutting down server")
         cherrypy.engine.exit()
