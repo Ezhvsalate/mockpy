@@ -2,13 +2,15 @@ from mockpy.models.mapping_request import *
 from mockpy.utils import log
 from mockpy.utils.config import *
 from mockpy.status.status import check_status_cherry_py
+from time import sleep
 import mockpy.utils.cherrypy_extensions
 
 
 class CherryPyMapper(object):
-    def __init__(self, mapping_handler=None, cherrypy=None):
+    def __init__(self, mapping_handler=None, cherrypy=None, delay=0):
         self.mapping_handler = mapping_handler
         self.cherrypy = cherrypy
+        self.delay = delay
 
     @check_status_cherry_py
     def handle_request(self):
@@ -25,6 +27,7 @@ class CherryPyMapper(object):
         if len(items) > 1:
             log.log_multiple_matches(items)
 
+        sleep(self.delay)
         matched_item = items[0]
         response = matched_item.response
 

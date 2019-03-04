@@ -10,18 +10,18 @@ from mockpy.utils.config import *
 class CherryPyServer(object):
     exposed = True
 
-    def __init__(self, inout_path, res_path):
+    def __init__(self, inout_path, res_path, delay):
         self.handler = MappingItemsManager(inout_path, res_path)
         success("Server started successfully at %s:%s" %
                 ("http://127.0.0.1", cherrypy.config["server.socket_port"]))
+        self.delay = delay
 
     @cherrypy.expose
     def default(self, *args, **kwargs):
-        mapper = CherryPyMapper(mapping_handler=self.handler, cherrypy=cherrypy)
-        return mapper.handle_request()
+        mapper = CherryPyMapper(mapping_handler=self.handler, cherrypy=cherrypy, delay=self.delay)
+        return mapper.handle_request(delay=self.delay)
 
-
-def start_mock_server(port, inout_path, res_path):
+def start_mock_server(port, inout_path, res_path, delay):
     cherrypy.config.update({'server.socket_port': port, "environment": "embedded"})
     cherrypy.config.update({'server.socket_host': '0.0.0.0'})
     def signal_handler(signal, frame):
@@ -30,4 +30,4 @@ def start_mock_server(port, inout_path, res_path):
         success("Server shutdown successfully")
 
     signal.signal(signal.SIGINT, signal_handler)
-    cherrypy.quickstart(CherryPyServer(inout_path, res_path))
+    cherrypy.quickstart(CherryPyServer(inout_path, res_path, delay))

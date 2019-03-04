@@ -82,6 +82,9 @@ def add_start_parser(sub_parsers):
     new_parser.add_argument('--res', '-r', help="folder containing json/html/image resources",
                             type=str, default="res")
 
+    new_parser.add_argument('--delay', default=0,
+                            type=int, help='Delay before sending response, seconds.')
+
     new_parser.required = False
 
 

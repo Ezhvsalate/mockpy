@@ -33,7 +33,7 @@ def start():
     else:
         info("Starting mock server")
         print_environment(args)
-        start_mock_server(args.port, args.inout, args.res)
+        start_mock_server(args.port, args.inout, args.res, args.delay)
 
 
 def get_updated_network_proxy(args):
