@@ -1,6 +1,8 @@
 __author__ = 'omarsubhiabdelhafith'
 import unittest
+
 from mockpy.status.status import Status
+
 
 class StatusTests(unittest.TestCase):
 

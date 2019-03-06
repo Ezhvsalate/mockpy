@@ -1,6 +1,7 @@
 __author__ = 'omarsubhiabdelhafith'
 
 import unittest
+
 from mockpy.core.cherrypy_mapper import *
 
 
@@ -35,7 +36,6 @@ class MappingRequestTests(unittest.TestCase):
         request_2 = MappingRequest({"url": ".*1/2.*", "method": "get"})
         assert request_1 != request_2
 
-    def test_check_method_is_equal(self):
         request_1 = MappingRequest({"url": ".*1/2.*", "method": "get"})
         request_2 = MappingRequest({"url": ".*1/2.*", "method": "gEt"})
         assert request_1 == request_2
@@ -50,7 +50,6 @@ class MappingRequestTests(unittest.TestCase):
         assert request_1 != request_2
 
     def test_check_matches_headers(self):
-
         dic_headers = {"key1": "value1", "key2": "value2"}
         request_2 = MappingRequest({"url": ".*1/2.*", "headers": dic_headers})
 

@@ -1,9 +1,11 @@
-import yaml
-from .mapping_item import *
-from mockpy.utils import log
 import re
-from watchdog.observers import Observer
+
+import yaml
 from watchdog.events import FileSystemEventHandler
+from watchdog.observers import Observer
+
+from mockpy.utils import log
+from .mapping_item import *
 
 
 class MappingItemsManager(object):
@@ -19,7 +21,7 @@ class MappingItemsManager(object):
         self.mappings = list(map(self.create_mapping_item, self.yaml_files))
 
     def create_mapping_item(self, yml_file):
-        full_path = self.inout_path + "/" + yml_file
+        full_path = os.path.join(self.inout_path, yml_file)
 
         with open(full_path, "r") as file:
             return MappingItem(yaml.load(file), full_path, self.res_path)

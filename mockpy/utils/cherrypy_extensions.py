@@ -1,6 +1,6 @@
 import cherrypy
-from mockpy.models.mapping_request import *
 
+from mockpy.models.mapping_request import *
 
 """
     Extensions
@@ -16,5 +16,6 @@ def to_mapper_request():
         dic["body"] = cherrypy.request.body.read()
 
     return MappingRequest(dic)
+
 
 setattr(cherrypy, "to_mapper_request", to_mapper_request)

@@ -1,9 +1,10 @@
 import unittest
-from mockpy.models.mapping_items_manager import *
-from mock import Mock
-from mockpy.core.cherrypy_mapper import *
-
 from os import path
+
+from mock import Mock
+
+from mockpy.core.cherrypy_mapper import *
+from mockpy.models.mapping_items_manager import *
 
 input_path = os.path.dirname(path.abspath(__file__)) + "/inout"
 res_path = os.path.dirname(path.abspath(__file__)) + "/res"
@@ -49,8 +50,8 @@ class MapperResponseTests(unittest.TestCase):
         mock_mapping_request = Mock(url="http://www.some_base.com/1/2/x/ss?test", method="get")
         response = self.mapper.response_for_mapping_request(mock_mapping_request)[0]
 
-        assert "key1" in response.body_response().decode("utf-8")
-        assert "abc" not in response.body_response().decode("utf-8")
+        assert "key1" in response.body_response()
+        assert "abc" not in response.body_response()
 
     def test_return_status_code(self):
         mock_mapping_request = Mock(url="http://www.some_base.com/1/2/x/ss?test", method="get")
@@ -83,6 +84,7 @@ class CherryPyMapperTests(unittest.TestCase):
         cherry_mapper.handle_request()
 
         assert mock_cherry.response.headers == {"header_key": "header_value"}
+
 
 if __name__ == '__main__':
     unittest.main()

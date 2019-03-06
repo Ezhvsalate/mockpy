@@ -11,28 +11,26 @@ with open('HISTORY.rst') as history_file:
     history = history_file.read().replace('.. :changelog:', '')
 
 requirements = [
-    "mock",
     "cherrypy",
-    "termcolor",
+    "colorama",
     "watchdog",
-    "netlib",
-    "mitmproxy"
+    "pyyaml"
 ]
 
 test_requirements = [
     "mock",
-    "termcolor"
+    "pytest"
 ]
 
 setup(
     app=['mockpy.py'],
     name='mockpy',
     version=version.VERSION,
-    description="Mockpy is a python open source line utility to quickly create mock servers on Mac OS X.",
+    description="Mockpy is a python open source line utility to create development mock servers..",
     long_description=readme + '\n\n' + history,
     author="Omar Abdelhafith",
     author_email='o.arrabi@me.com',
-    url='https://github.com/oarrabi/mockpy',
+    url='https://github.com/Ezhvsalate/mockpy',
     packages=[
         'mockpy',
         "mockpy.core",
@@ -50,9 +48,8 @@ setup(
         'Intended Audience :: Developers',
         'License :: OSI Approved :: BSD License',
         'Natural Language :: English',
-        "Programming Language :: Python :: 2",
-        'Programming Language :: Python :: 2.6',
-        'Programming Language :: Python :: 2.7',
+        "Programming Language :: Python :: 3",
+        'Programming Language :: Python :: 3.6'
     ],
     test_suite='tests',
     tests_require=test_requirements,

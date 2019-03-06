@@ -1,4 +1,5 @@
 import json
+import os
 
 
 class MappingResponse(object):
@@ -12,7 +13,7 @@ class MappingResponse(object):
         self.setup_headers()
 
     def title(self):
-        return self.res_path + "/" + self.body.file_name
+        return os.path.join(self.res_path, self.body.file_name)
 
     def setup_status(self):
         self.status = self.response_dic["status"] if "status" in self.response_dic else 200
@@ -46,7 +47,6 @@ class BodyResponse(object):
         self.res_path = res_path
         self.value = ""
         self._body_type = BodyResponse.NONE
-
         if "body_file" in dic:
             self._body_type = BodyResponse.FILE
             self.file_name = dic["body_file"]
@@ -68,27 +68,24 @@ class BodyResponse(object):
     """
         Reading file
     """
+
     def value_from_file(self, file):
-        self.value = lambda: self.read_file(file, decode_utf8=True)
+        self.value = lambda: self.read_file(file, decode_utf8=False)
 
     def set_from_object(self, object):
         if isinstance(object, str):
-            self.value = lambda: json.dumps(object).encode('utf8')
+            self.value = lambda: json.dumps(object)
 
         elif isinstance(object, dict) or isinstance(object, list):
-            self.value = lambda: json.dumps(object).encode('utf8')
+            self.value = lambda: json.dumps(object)
 
     def value_from_image(self, image):
         self.value = lambda: self.read_file(image, decode_utf8=False)
 
-    def read_file(self, file, decode_utf8=True):
-        with open(self.res_path + "/" + file, "r") as the_file:
+    def read_file(self, file, decode_utf8=False):
+        with open(os.path.join(self.res_path, file), "r") as the_file:
             content = the_file.read()
-            if decode_utf8:
-                content = unicode(content, 'utf-8')
-                return content.encode('utf8')
-            else:
-                return content
+            return content
 
     RAW = "raw"
     IMAGE = "image"

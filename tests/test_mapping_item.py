@@ -1,9 +1,11 @@
 __author__ = 'omarsubhiabdelhafith'
 
 import unittest
-from mock import Mock
-from mockpy.models.mapping_items_manager import *
 from os import path
+
+from mock import Mock
+
+from mockpy.models.mapping_items_manager import *
 
 res_path = os.path.dirname(path.abspath(__file__)) + "/res"
 

@@ -1,10 +1,11 @@
-#!/usr/bin/env python
+import signal
 
 import cherrypy
+import socket
+
 from mockpy.models.mapping_items_manager import *
-from cherrypy_mapper import *
-import signal
 from mockpy.utils.config import *
+from .cherrypy_mapper import *
 
 
 class CherryPyServer(object):
@@ -13,7 +14,7 @@ class CherryPyServer(object):
     def __init__(self, inout_path, res_path, delay):
         self.handler = MappingItemsManager(inout_path, res_path)
         success("Server started successfully at %s:%s" %
-                ("http://127.0.0.1", cherrypy.config["server.socket_port"]))
+                ("http://" + socket.gethostbyname(socket.gethostname()), cherrypy.config["server.socket_port"]))
         self.delay = delay
 
     @cherrypy.expose
@@ -21,9 +22,11 @@ class CherryPyServer(object):
         mapper = CherryPyMapper(mapping_handler=self.handler, cherrypy=cherrypy, delay=self.delay)
         return mapper.handle_request(delay=self.delay)
 
+
 def start_mock_server(port, inout_path, res_path, delay):
     cherrypy.config.update({'server.socket_port': port, "environment": "embedded"})
     cherrypy.config.update({'server.socket_host': '0.0.0.0'})
+
     def signal_handler(signal, frame):
         info("\nShutting down server")
         cherrypy.engine.exit()

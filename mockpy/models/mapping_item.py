@@ -1,5 +1,5 @@
 from .mapping_request import MappingRequest
-from .mapping_respone import MappingResponse
+from .mapping_response import MappingResponse
 from os.path import basename
 import os
 

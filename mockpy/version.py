@@ -1,3 +1,6 @@
-VERSION = "0.1.7"
+VERSION = "0.2.0"
 AUTHOR = "Omar Abdelhafith"
-VERSION_STRING = "mockpy: Version %s\nAuthor: %s" % (VERSION, AUTHOR)
+MODIFIED_BY = "Ezhvsalate"
+VERSION_STRING = "mockpy: Version {version}, author: {author}, modified by: {modified}".format(version=VERSION,
+                                                                                               author=AUTHOR,
+                                                                                               modified=MODIFIED_BY)

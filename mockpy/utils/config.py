@@ -1,19 +1,19 @@
-from termcolor import colored
+from colorama import Fore
 
 global verbose
 verbose = False
 
 
 def error(msg):
-    print(colored(msg, "red"))
+    print(Fore.RED + msg)
 
 
 def warn(msg):
-    print(colored(msg, "yellow"))
+    print(Fore.YELLOW + msg)
 
 
 def success(msg):
-    print(colored(msg, "green"))
+    print(Fore.GREEN + msg)
 
 
 def info(msg):
